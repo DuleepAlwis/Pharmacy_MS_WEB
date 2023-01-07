@@ -1,10 +1,14 @@
 package com.pharmacyms.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +17,7 @@ public class MedicineEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="medicine_id")
 	private long id;
 	
 	@Column(name="name")
@@ -27,65 +32,15 @@ public class MedicineEntity {
 	@Column(name="image")
 	private String image;
 
-	public MedicineEntity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public MedicineEntity(long id, String name, int quantity, double price, String image) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
-		this.image = image;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	@Override
-	public String toString() {
-		return "MedicineEntity [id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price
-				+ ", image=" + image + "]";
-	}
+	/* Related to supplier_medicine_tb*/
+	@OneToMany(mappedBy="medicineId")
+	private List<SupplierMedicineEntity> suppliers = new ArrayList<SupplierMedicineEntity>();
 	
+	/*Related to purchase_medicine_tb*/
+	@OneToMany(mappedBy="purchasedMedidcineId")
+	private List<PurchaseMedicineEntity> medicinePurchases = new ArrayList<PurchaseMedicineEntity>();
 	
+	/*Related to order_medicine_tb*/
+	@OneToMany(mappedBy="medicineInOrders")
+	private List<OrderMedicineEntity> medicineOrders = new ArrayList<OrderMedicineEntity>();
 }

@@ -4,12 +4,12 @@ public enum Role {
 
 	ADMIN("Admin"),
 	CUSTOMER("Customer"),
-	EMPLOYEE("EMPLOYEE");
+	SUPERUSER("SUPER_USER"),
+	EMPLOYEEUSER("EMPLOYEE_USER");
 	
 	private String value;
 	
-	Role(String string) {
-		// TODO Auto-generated constructor stub
+	Role(String value) {
 		this.value = value;
 	}
 	
